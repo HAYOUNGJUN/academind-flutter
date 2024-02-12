@@ -25,17 +25,29 @@ class _ExpensesState extends State<Expenses> {
     ),
   ];
 
+  void _openAddExpenseOverlay() {
+    showModalBottomSheet(
+        context: context, builder: (ctx) => const Text('Modal bottom sheet'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const Text('The chart'),
-          Expanded(
-            child: ExpensesList(expenses: _registeredExpense),
-          )
+      appBar: AppBar(
+        title: const Text('Flutter ExpenseTracker'),
+        actions: [
+          IconButton(
+            onPressed: _openAddExpenseOverlay,
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
+      body: Column(children: [
+        const Text('The chart'),
+        Expanded(
+          child: ExpensesList(expenses: _registeredExpense),
+        )
+      ]),
     );
   }
 }
